@@ -1,2 +1,2 @@
 # Tic Tac Toe Game
- HTML, CSS, JavaScript 
+ HTML, CSS, JavaScript, Jquery 

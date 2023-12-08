@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Homework 2.3: Tic Tac Toe Game</title>
+        <link rel='stylesheet' type='text/css' href='tictactoe.css'/>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="header"><h1>Tic Tac Toe</h1></div><hr><br>
+            <div class="playerStatus"></div><br>
+            
+            <div class="board">
+                <div class="box" id="b0"></div>
+                <div class="box" id="b1"></div>
+                <div class="box" id="b2"></div>
+                <div class="box" id="b3"></div>
+                <div class="box" id="b4"></div>
+                <div class="box" id="b5"></div>
+                <div class="box" id="b6"></div>
+                <div class="box" id="b7"></div>
+                <div class="box" id="b8"></div>
+            </div><br><br>
+            <div class="buttons">
+                <button id="start">START</button>
+                <button id="reset">RESET</button>
+            </div>
+        </div>
+
+        <script>
+
+            $(document).ready(function() {
+               
+                let playerStatus = document.getElementsByClassName("playerStatus");
+                let board = document.getElementsByClassName("board");
+                let startButton = document.getElementById("start");
+                let resetButton = document.getElementById("reset");
+
+                let playerX = 'X';
+                let playerO = 'O';
+                let currentPlayer = playerX;
+                let activeBoard = [];
+                let endGame = false;
+               
+                $(resetButton).hide();   // Initially hide reset button
+                $(board).hide();        // Initially hide tictactoe board
+
+                $(startButton).on('click', function() {
+                    $(startButton).hide();
+                    $(resetButton).show();
+                    $(board).show();
+                    $(".playerStatus").text("Player " + currentPlayer + "'s turn...");
+                    begin();
+                });
+
+                function begin() {
+                    $("#b0").on("click", function() {
+                        let b = "0";
+                        playerMove(b);
+                    });
+                    $("#b1").on("click", function() {
+                        let b = "1";
+                        playerMove(b);
+                    });
+                    $("#b2").on("click", function() {
+                        let b = "2";
+                        playerMove(b);
+                    });
+                    $("#b3").on("click", function() {
+                        let b = "3";
+                        playerMove(b);
+                    });
+                    $("#b4").on("click", function() {
+                        let b = "4";
+                        playerMove(b);
+                    });
+                    $("#b5").on("click", function() {
+                        let b = "5";
+                        playerMove(b);
+                    });
+                    $("#b6").on("click", function() {
+                        let b = "6";
+                        playerMove(b);
+                    });
+                    $("#b7").on("click", function() {
+                        let b = "7";
+                        playerMove(b);
+                    });
+                    $("#b8").on('click', function() {
+                        let b = "8";
+                        playerMove(b);
+                    });
+                }
+
+                function playerMove(index) {
+
+                    // Inhibits user from keeping playing after someone won
+                    if (endGame) {
+                        return;
+                    }
+
+                    // Ensures a valid play move 
+                    if ( activeBoard[index] != null) {
+                        return;
+                    }
+
+                    activeBoard[index] = currentPlayer;
+                   
+                    if (index == 0) {
+                        let element = document.getElementById("b0");
+                        element.innerHTML = currentPlayer;
+                    }
+                    if (index == 1) {
+                        let element = document.getElementById("b1");
+                        element.innerHTML = currentPlayer;
+                    }
+                    if (index == 2) {
+                        let element = document.getElementById("b2");
+                        element.innerHTML = currentPlayer;
+                    }
+                    if (index == 3) {
+                        let element = document.getElementById("b3");
+                        element.innerHTML = currentPlayer;
+                    }
+                    if (index == 4) {
+                        let element = document.getElementById("b4");
+                        element.innerHTML = currentPlayer;
+                    }
+                    if (index == 5) {
+                        let element = document.getElementById("b5");
+                        element.innerHTML = currentPlayer;
+                    }
+                    if (index == 6) {
+                        let element = document.getElementById("b6");
+                        element.innerHTML = currentPlayer;
+                    }
+                    if (index == 7) {
+                        let element = document.getElementById("b7");
+                        element.innerHTML = currentPlayer;
+                    }
+                    if (index == 8) {
+                        let element = document.getElementById("b8");
+                        element.innerHTML = currentPlayer;
+                    }
+
+                    if (currentPlayer == playerX) {
+                        currentPlayer = playerO;
+                    } else {
+                        currentPlayer = playerX;
+                    }
+                    $(".playerStatus").text("Player " + currentPlayer + "'s turn");
+
+                    // Check if theres a winner yet
+                    checkStatus();
+                }
+
+                function checkStatus() {
+                    if (activeBoard[0] == "X" && activeBoard[3] == "X" && activeBoard[6] == "X") {
+                        alert("Player X WON!");
+                        endGame = true;
+                    } else if (activeBoard[0] == "O" && activeBoard[3] == "O" && activeBoard[6] == "O") {
+                        alert("Player O WON!");
+                        endGame = true;
+                    } else if (activeBoard[1] == "X" && activeBoard[4] == "X" && activeBoard[7] == "X") {
+                        alert("Player X WON!");
+                        endGame = true;
+                    } else if (activeBoard[1] == "O" && activeBoard[4] == "O" && activeBoard[7] == "O") {
+                        alert("Player O WON!");
+                        endGame = true;
+                    } else if (activeBoard[2] == "X" && activeBoard[5] == "X" && activeBoard[8] == "X") {
+                        alert("Player X WON!");
+                        endGame = true;
+                    } else if (activeBoard[2] == "O" && activeBoard[5] == "O" && activeBoard[8] == "O") {
+                        alert("Player O WON!");
+                        endGame = true;
+                    } else if (activeBoard[0] == "X" && activeBoard[1] == "X" && activeBoard[2] == "X") {
+                        alert("Player X WON!");
+                        endGame = true;
+                    } else if (activeBoard[0] == "O" && activeBoard[1] == "O" && activeBoard[2] == "O") {
+                        alert("Player O WON!");
+                        endGame = true;
+                    } else if (activeBoard[3] == "X" && activeBoard[4] == "X" && activeBoard[5] == "X") {
+                        alert("Player X WON!");
+                        endGame = true;
+                    } else if (activeBoard[3] == "O" && activeBoard[4] == "O" && activeBoard[5] == "O") {
+                        alert("Player O WON!");
+                        endGame = true;
+                    } else if (activeBoard[6] == "X" && activeBoard[7] == "X" && activeBoard[8] == "X") {
+                        alert("Player X WON!");
+                        endGame = true;
+                    } else if (activeBoard[6] == "O" && activeBoard[7] == "O" && activeBoard[8] == "O") {
+                        alert("Player O WON!");
+                        endGame = true;
+                    } else if (activeBoard[0] == "X" && activeBoard[4] == "X" && activeBoard[8] == "X") {
+                        alert("Player X WON!");
+                        endGame = true;
+                    } else if (activeBoard[0] == "O" && activeBoard[4] == "O" && activeBoard[8] == "O") {
+                        alert("Player O WON!");
+                        endGame = true;
+                    } else if (activeBoard[2] == "X" && activeBoard[4] == "X" && activeBoard[6] == "X") {
+                        alert("Player X WON!");
+                        endGame = true;
+                    } else if (activeBoard[2] == "O" && activeBoard[4] == "O" && activeBoard[6] == "O") {
+                        alert("Player O WON!");
+                        endGame = true;
+                    }
+                    if (endGame) {
+                        $(".playerStatus").text("Game over, click reset to play again!");
+                    }
+                }
+
+                $(resetButton).on('click', function() {
+                    $(resetButton).hide();
+                    $(startButton).show();
+                    location.reload();
+                });
+
+            }); //End of ready function
+        </script>
+    </body>
+</html>
